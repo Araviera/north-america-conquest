@@ -1,5 +1,7 @@
 # Welcome to North America Conquest! 🌎
 
+This is stanford's code in place graduation project
+
 In **North America Conquest**, you embark on a journey to dominate the continent. Choose your player (**USA**, **Canada**, or **Mexico**).
 
 ## Gameplay
@@ -9,3 +11,5 @@ In **North America Conquest**, you embark on a journey to dominate the continent
 - **Persistent Progress**: Your game progress is saved continuously, so you can pick up right where you left off—unless it's game over, or you decide to reset.
 
 Enjoy!
+
+
