@@ -1,17 +1,3 @@
 {
-    "save": "true",
-    "player": "usa",
-    "player_gold": 51600,
-    "player_miners": 4,
-    "player_firepower": 613,
-    "player_flag": "\nNovus ordo seclorum\n|* * * * * * * * * * OOOOOOOOOOOOOOOOOOOOOOOOO|\n| * * * * * * * * *  OOOOOOOOOOOOOOOOOOOOOOOOO|\n|* * * * * * * * * * OOOOOOOOOOOOOOOOOOOOOOOOO|\n| * * * * * * * * *  OOOOOOOOOOOOOOOOOOOOOOOOO|\n|* * * * * * * * * * OOOOOOOOOOOOOOOOOOOOOOOOO|\n| * * * * * * * * *  OOOOOOOOOOOOOOOOOOOOOOOOO|\n|* * * * * * * * * * OOOOOOOOOOOOOOOOOOOOOOOOO|\n|OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO|\n|OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO|\n|OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO|\n|OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO|\n|OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO|\n|OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO|\n",
-    "turn": 3,
-    "cpu1": "mexico",
-    "cpu1_gold": 35000,
-    "cpu1_miners": 4,
-    "cpu1_firepower": 406,
-    "cpu2": "canada",
-    "cpu2_gold": 14200,
-    "cpu2_miners": 3,
-    "cpu2_firepower": 5607
+    "save": "false",
 }
