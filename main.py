@@ -5,6 +5,7 @@ import os
 import research
 import pydata
 import time
+import art
 
 
 def main():
@@ -263,7 +264,7 @@ def main():
             else:
                 pydata.clear_console()
                 pydata.attack()
-                time.sleep(1)
+                time.sleep(3)
 
 
         elif action == "7":

@@ -2,6 +2,7 @@ import json
 import random
 import os
 import time
+import art
 
 av_countries = ["usa", "canada", "mexico"]
 
@@ -178,6 +179,8 @@ def attack():
             save['cpu1_firepower'] -= attack_power
             with open('save.json', 'w') as f:
                 json.dump(save, f, indent=4)
+            art.rising()
+            art.falling()
             print("You attacked", save['cpu1'], "with", attack_power, "firepower!")
 
             if save['cpu1_firepower'] < 0:
@@ -193,6 +196,8 @@ def attack():
             save['cpu2_firepower'] -= attack_power
             with open('save.json', 'w') as f:
                 json.dump(save, f, indent=4)
+            art.rising()
+            art.falling()
             print("You attacked", save['cpu2'], "with", attack_power, "firepower!")
 
             if save['cpu2_firepower'] < 0:
