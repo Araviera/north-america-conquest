@@ -11,6 +11,7 @@ with open('save.json', 'r') as f:
 with open('data.json', 'r') as f:
     data = json.load(f)
 
+############# Welcome Message ################
 welcome = """
 ******************************************************
 Welcome to North America Conquest!
@@ -762,3 +763,65 @@ def ai(action):
             f.write('{"save": "false"}')
         clear_console()
         exit()
+        
+############# US Anthem ################
+def us_anthem():
+    print("And the rocket's red glare,")
+    time.sleep(1)
+    print("The bombs bursting in air,")
+    time.sleep(1)
+    print("Gave proof through the night")
+    time.sleep(1)
+    print("That our flag was still there;")
+    time.sleep(1)
+    print("O say does that star-spangled banner yet wave")
+    time.sleep(1)
+    print("O'er the land of the free and the home of the brave!")
+    time.sleep(1)
+    print("You have chosen to play as the mighty US!")
+    print("Prepare to dominate north america!")
+    time.sleep(2)
+
+############# Canada Anthem ################
+def can_anthem():
+    print("O Canada!")
+    time.sleep(1)
+    print("From far and wide, O Canada,")
+    time.sleep(1)
+    print("We stand on guard for thee.")
+    time.sleep(1)
+    print("God keep our land glorious and free!")
+    time.sleep(1)
+    print("O Canada, we stand on guard for thee.")
+    time.sleep(1)
+    print("O Canada, we stand on guard for thee.")
+    time.sleep(1)
+
+    print("You have chosen to play as Canada!")
+    print("Prepare for an epic conquest!")
+    print("your objective is clear. take over north america!")
+    time.sleep(2)
+
+############# Mexico Anthem ################
+def mx_anthem():
+    print("¡Guerra, guerra sin tregua al que intente")
+    time.sleep(1)
+    print("de la patria manchar los blasones!")
+    time.sleep(1)
+    print("¡Guerra, guerra! los patrios pendones")
+    time.sleep(1)
+    print("en las olas de sangre empapad.")
+    time.sleep(1)
+    print("¡Guerra, guerra! en el monte, en el valle,")
+    time.sleep(1)
+    print("los cañones horrísonos truenen")
+    time.sleep(1)
+    print("y los ecos sonoros resuenen")
+    time.sleep(1)
+    print("con las voces de ¡Unión! ¡Libertad!")
+    clear_console()
+    print("¡Viva México!")
+    time.sleep(1)
+    print("You have chosen to play as Mexico!")
+    print("Prepare for an epic conquest!")
+    time.sleep(2)
