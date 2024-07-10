@@ -32,6 +32,7 @@ Let the conquest begin!
 """
 
 ############################################################################################################
+###################### Clear Console Function ############################################################
 def clear_console():
     if os.name == 'nt':  # Windows
         os.system('cls')
@@ -39,6 +40,7 @@ def clear_console():
         os.system('clear')
 
 ############################################################################################################
+###################### Spy Function ######################################################################
 def spy():
     with open('save.json', 'r') as f:
         save = json.load(f)
@@ -51,7 +53,7 @@ def spy():
                     2. {save['cpu2']} (will cost {data['spy_cost']} gold)
                     3. Exit
                     """)
-    
+
     if choice == "1":
         if save['player_gold'] < data['spy_cost']:
             print("You don't have enough gold to spy on", save['cpu1'])
@@ -76,7 +78,7 @@ def spy():
                 {save['cpu2']} has {save['cpu2_gold']} gold, {save['cpu2_miners']} miners, and {save['cpu2_firepower']} firepower.
                 """)
 ############################################################################################################
-
+###################### Miners Function ###################################################################
 def miners():
     with open('save.json', 'r') as f:
         save = json.load(f)
@@ -90,7 +92,6 @@ def miners():
                   2. No
                   """)
     
-###############################################################################
     if buyminers == "1":
     
         if save['player_gold'] < data['miner_cost']:
@@ -101,13 +102,13 @@ def miners():
             print("You have bought a miner.")
             print("You now have", save['player_miners'], "miners.")
 
-###############################################################################
         with open('save.json', 'w') as f:
             json.dump(save, f, indent=4)
         with open('data.json', 'w') as f:
             json.dump(data, f, indent=4)
 
 ############################################################################################################
+###################### CPU Function #####################################################################
 def cpu():
     with open('save.json', 'r') as f:
         save = json.load(f)
@@ -159,6 +160,7 @@ def cpu():
         json.dump(data, f, indent=4)
                   
 ############################################################################################################
+###################### Attack Function ###################################################################
 def attack():
     with open('save.json', 'r') as f:
         save = json.load(f)
@@ -172,7 +174,7 @@ def attack():
                     3. Exit
                     """)
     
-##########################################################################
+
     if choice == "1":
             attack_power = random.randint(save['player_firepower']// 4, save['player_firepower']// 2)
             save['player_firepower'] -= attack_power
@@ -214,12 +216,12 @@ def attack():
         attack()
 
 ############################################################################################################
+###################### AI Function #######################################################################
 def ai(action):
     with open('save.json', 'r') as f:
         save = json.load(f)
     with open('data.json', 'r') as f:
         data = json.load(f)
-##############################################################
 
     if save['cpu1_gold'] < 5000:
         c = 0.1

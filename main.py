@@ -18,7 +18,7 @@ def main():
         with open('save.json', 'r') as f:
             return json.load(f)
         
-    # make a turn counter
+##################  Turns  ##################
     def turn_counter():
         save['player_gold'] += save['player_miners'] * data['miner_profit']
         save['cpu1_gold'] += save['cpu1_miners'] * data['miner_profit']
@@ -27,30 +27,34 @@ def main():
         with open('save.json', 'w') as f:
             json.dump(save, f, indent=4)
         
-
+##################  Start  ##################
     pydata.clear_console()
+    #when there is no save
     if save['save'] == "false":
+        #game starts from the beginning
         print(pydata.welcome)
-
-        print("""
+        #player chooses a country to play as
+        player = input("""
               Choose a country to play as:
                USA
                  Canada
                      Mexico
+                       
               """)
-        player = input()
+        #while loop to make sure the player chooses a valid country
         while player.lower() not in ["usa", "canada", "mexico"]:
             pydata.clear_console()
-            print("Invalid input. Please choose a valid country to play as:")
-            player = input()
+            player = input("Invalid input. Please choose a valid country to play as: ")
+        
+        #save the player's choice into lowercase for convenience
         save['player'] = player.lower()
         
 
-    ##################  USA  ##################
+    ##############################  USA  ##################
         if save['player'] == "usa":
 
 
-
+#save the player's gold, miners, and firepower into the save file
             save['player_gold'] = data['usa_gold']
             with open('save.json', 'w') as f:
                 json.dump(save, f)
@@ -64,7 +68,7 @@ def main():
                 json.dump(save, f, indent=4)
 
 
-
+            #show the national anthem
             pydata.clear_console()
             save['player_flag'] = flags.usa
             print("And the rocket's red glare,")
@@ -83,11 +87,11 @@ def main():
             print("Prepare to dominate north america!")
             time.sleep(2)
 
-    ##################  Canada  ##################
+    ###########################  Canada  ##################
         elif save['player'] == "canada":
 
 
-            
+            #save the player's gold, miners, and firepower into the save file
             save['player_gold'] = data['canada_gold']
             with open('save.json', 'w') as f:
                 json.dump(save, f)
@@ -101,7 +105,7 @@ def main():
                 json.dump(save, f, indent=4)
 
 
-
+            #show the national anthem
             pydata.clear_console()
             save['player_flag'] = flags.canada
             print("O Canada!")
@@ -117,8 +121,6 @@ def main():
             print("O Canada, we stand on guard for thee.")
             time.sleep(1)
 
-
-
             print("You have chosen to play as Canada!")
             print("Prepare for an epic conquest!")
             print("your objective is clear. take over north america!")
@@ -129,7 +131,7 @@ def main():
         elif save['player'] == "mexico":
 
 
-            
+            #save the player's gold, miners, and firepower into the save file
             save['player_gold'] = data['mexico_gold']
             with open('save.json', 'w') as f:
                 json.dump(save, f)
@@ -142,7 +144,7 @@ def main():
             with open('save.json', 'w') as f:
                 json.dump(save, f)
 
-
+            #show the national anthem
             pydata.clear_console()
             save['player_flag'] = flags.mexico
             print("¡Guerra, guerra sin tregua al que intente")
@@ -181,10 +183,12 @@ def main():
     
 ####################################################
     while True:
-        print("                                **North   America   Conquest**")
+
         print(f"""
+                                                **North America Conquest**
               Turn: {save['turn']}   Country: {save['player']}   Gold: {save['player_gold']}   Miners: {save['player_miners']}   Firepower: {save['player_firepower']}
               """)
+        
         save = load_save()
         print(save['player_flag'])
         action = input("""what would you like to do?
@@ -196,77 +200,60 @@ def main():
                        6. exit (progress will be saved)
                        7. reset the game
                        """)
-
-        if action == "gold":
-            pydata.clear_console()
-            print('you have:', save['player_gold'], 'amount of gold.')
-            time.sleep(1)
-
-
-        elif action == "turn":
-            pydata.clear_console()
-            print('you are on turn:', save['turn'])
-            time.sleep(1)
         
-        elif action == "5":
-            pydata.clear_console()
-            pydata.spy()
-            time.sleep(3)
-            pydata.clear_console()
-
-
-        elif action == "1":
+#################################  Actions  ################################
+##################  Miners  ##################
+        if action == "1":
             pydata.clear_console()
             pydata.miners()
             time.sleep(1)
             pydata.clear_console()
 
-        elif action == "firepower":
-            pydata.clear_console()
-            print('you have:', save['player_firepower'], 'amount of firepower.')
-            time.sleep(1)
-
-
+##################  Research  ##################
         elif action == "2":
             pydata.clear_console()
             research.researchmenu()
             time.sleep(1)
             pydata.clear_console()
 
-############################################
-############### DO NOT USE #################
-############## SUPER BUGGY #################
-############################################
-        elif action == "debug":
-            while True:
-                time.sleep(1)
-                turn_counter()
-############################################
-############################################
-############################################
-
-                
-
-        elif action == "4":
-            turn_counter()
-            print("turn ended.")
-            pydata.ai(action)
-            time.sleep(2)
-            pydata.clear_console()
-                
+##################  Attack  ##################
         elif action == "3":
             if save['turn'] < 3:
                 pydata.clear_console()
                 print("You must wait until turn 3 to attack.")
                 time.sleep(1)
                 pydata.clear_console()
-                
             else:
                 pydata.clear_console()
                 pydata.attack()
                 time.sleep(3)
 
+##################  End Turn  ##################
+        elif action == "4":
+            turn_counter()
+            print("turn ended.")
+            pydata.ai(action)
+            time.sleep(2)
+            pydata.clear_console()
 
+##################  Spy  ##################
+        elif action == "5":
+            pydata.clear_console()
+            pydata.spy()
+            time.sleep(3)
+            pydata.clear_console()
+
+##################  Exit  ##################
+        elif action == "6":
+            sure = input("Are you sure you want to exit the game? (yes/no) ")
+            if sure == "yes":
+                pydata.clear_console()
+                break
+            else:
+                pydata.clear_console()
+                continue
+
+##################  Reset  ##################
         elif action == "7":
             sure = input("Are you sure you want to reset the game? (yes/no) ")
             if sure == "yes":
@@ -281,24 +268,7 @@ def main():
                 pydata.clear_console()
                 continue
 
-        elif action == "6":
-            sure = input("Are you sure you want to exit the game? (yes/no) ")
-            if sure == "yes":
-                pydata.clear_console()
-                break
-            else:
-                pydata.clear_console()
-                continue
-
-        elif action == "test":
-            pydata.clear_console()
-            turn_counter()
-            pydata.ai(action)
-            action = "debug"
-            time.sleep(1)
-
-
-#super secret uwu cheat code
+##################  UwU  ##################
         elif action == "uwu":
             pydata.clear_console()
             print(flags.uwu)
@@ -322,7 +292,7 @@ def main():
 
 
 
-
+##################  Invalid Input  ##################
         else:
             pydata.clear_console()
             print("Invalid input. Please choose a valid action")
