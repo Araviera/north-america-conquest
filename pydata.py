@@ -110,6 +110,26 @@ def miners():
 
 ############################################################################################################
 ###################### CPU Function #####################################################################
+def atk(cpu):
+            attack_power = random.randint(save['player_firepower']// 4, save['player_firepower']// 2)
+            cpuf = cpu + '_firepower'
+            save['player_firepower'] -= attack_power
+            save[cpuf] -= attack_power
+            with open('save.json', 'w') as f:
+                json.dump(save, f, indent=4)
+            art.rising()
+            art.falling()
+            print("You attacked", save[cpu], "with", attack_power, "firepower!")
+
+            if save[cpuf] < 0:
+                print(save[cpu], "has been defeated!")
+
+
+            if save['player_firepower'] == 0:
+                print(f"You don't have enough firepower to attack", {cpu})
+
+
+############################################################################################################
 def cpu():
     with open('save.json', 'r') as f:
         save = json.load(f)
@@ -177,37 +197,10 @@ def attack():
     
 
     if choice == "1":
-            attack_power = random.randint(save['player_firepower']// 4, save['player_firepower']// 2)
-            save['player_firepower'] -= attack_power
-            save['cpu1_firepower'] -= attack_power
-            with open('save.json', 'w') as f:
-                json.dump(save, f, indent=4)
-            art.rising()
-            art.falling()
-            print("You attacked", save['cpu1'], "with", attack_power, "firepower!")
-
-            if save['cpu1_firepower'] < 0:
-                print(save['cpu1'], "has been defeated!")
-
-
-            if save['player_firepower'] == 0:
-                print("You don't have enough firepower to attack", save['cpu1'])
+            atk("cpu1")
 
     elif choice == "2":
-            attack_power = random.randint(save['player_firepower']// 4, save['player_firepower']// 2)
-            save['player_firepower'] -= attack_power
-            save['cpu2_firepower'] -= attack_power
-            with open('save.json', 'w') as f:
-                json.dump(save, f, indent=4)
-            art.rising()
-            art.falling()
-            print("You attacked", save['cpu2'], "with", attack_power, "firepower!")
-
-            if save['cpu2_firepower'] < 0:
-                print(save['cpu2'], "has been defeated!")
-
-            if save['player_firepower'] == 0:
-                print("You don't have enough firepower to attack", save['cpu2'])
+            atk("cpu2")
 
     elif choice == "3":
         pass

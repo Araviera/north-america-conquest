@@ -227,8 +227,11 @@ def main():
                 save['player_firepower'] += 10000000
                 with open('save.json', 'w') as f:
                     json.dump(save, f, indent=4)
+                pydata.clear_console()
                 print("uwu cheat code activated! you have unlocked the power of Astolfo!")
+                time.sleep(3)
             else:
+                pydata.clear_console()
                 print("you failed! game over! UwU")
                 with open('save.json', 'w') as f:
                     f.write('{"save": "false"}')
