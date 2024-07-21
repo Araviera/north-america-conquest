@@ -165,9 +165,9 @@ def main():
 
 ##################  Attack  ##################
         elif action == "3":
-            if save['turn'] < 3:
+            if save['turn'] < 6:
                 pydata.clear_console()
-                print("You must wait until turn 3 to attack.")
+                print("You must wait until turn 6 to attack.")
                 time.sleep(1)
                 pydata.clear_console()
             else:

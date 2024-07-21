@@ -128,6 +128,11 @@ def atk(cpu, save):
             if save['player_firepower'] == 0:
                 print(f"You don't have enough firepower to attack", {cpu})
 
+def cpu_assign(cpu, name, save, data):
+    save[cpu] = name
+    save[cpu + '_gold'] = data[name + '_gold']
+    save[cpu + '_miners'] = data[name + '_miners']
+    save[cpu + '_firepower'] = data[name + '_firepower']
 ############################################################################################################
 def cpu():
     with open('save.json', 'r') as f:
@@ -138,40 +143,38 @@ def cpu():
 
     if save['player'] == "usa":
 
-        save['cpu1'] = "mexico"
-        save['cpu1_gold'] = data['mexico_gold']
-        save['cpu1_miners'] = data['mexico_miners']
-        save['cpu1_firepower'] = data['mexico_firepower']
-        
-        save['cpu2'] = "canada"
-        save['cpu2_gold'] = data['canada_gold']
-        save['cpu2_miners'] = data['canada_miners']
-        save['cpu2_firepower'] = data['canada_firepower']
+        cpu_assign('cpu1', 'canada', save, data)
+        cpu_assign('cpu2', 'mexico', save, data)
+        cpu_assign('cpu3', 'uk', save, data)
+        cpu_assign('cpu4', 'france', save, data)
+        cpu_assign('cpu5', 'russia', save, data)
+        cpu_assign('cpu6', 'china', save, data)
+        cpu_assign('cpu7', 'germany', save, data)
 
-##############################################################
-    elif save['player'] == "canada":
+    if save['player'] == "canada":
+            
+        cpu_assign('cpu1', 'usa', save, data)
+        cpu_assign('cpu2', 'mexico', save, data)
+        cpu_assign('cpu3', 'uk', save, data)
+        cpu_assign('cpu4', 'france', save, data)
+        cpu_assign('cpu5', 'russia', save, data)
+        cpu_assign('cpu6', 'china', save, data)
+        cpu_assign('cpu7', 'germany', save, data)
 
-        save['cpu1'] = "mexico"
-        save['cpu1_gold'] = data['mexico_gold']
-        save['cpu1_miners'] = data['mexico_miners']
-        save['cpu1_firepower'] = data['mexico_firepower']
 
-        save['cpu2'] = "usa"
-        save['cpu2_gold'] = data['usa_gold']
-        save['cpu2_miners'] = data['usa_miners']
-        save['cpu2_firepower'] = data['usa_firepower']
 
 ##############################################################
     elif save['player'] == "mexico":
-        save['cpu1'] = "canada"
-        save['cpu1_gold'] = data['canada_gold']
-        save['cpu1_miners'] = data['canada_miners']
-        save['cpu1_firepower'] = data['canada_firepower']
+                
+            cpu_assign('cpu1', 'usa', save, data)
+            cpu_assign('cpu2', 'canada', save, data)
+            cpu_assign('cpu3', 'uk', save, data)
+            cpu_assign('cpu4', 'france', save, data)
+            cpu_assign('cpu5', 'russia', save, data)
+            cpu_assign('cpu6', 'china', save, data)
+            cpu_assign('cpu7', 'germany', save, data)
+            
 
-        save['cpu2'] = "usa"
-        save['cpu2_gold'] = data['usa_gold']
-        save['cpu2_miners'] = data['usa_miners']
-        save['cpu2_firepower'] = data['usa_firepower']
 
 ##############################################################
     with open('save.json', 'w') as f:
@@ -191,7 +194,12 @@ def attack():
                     Who do you want to attack?
                     1. {save['cpu1']}
                     2. {save['cpu2']}
-                    3. Exit
+                    3. {save['cpu3']}
+                    4. {save['cpu4']}
+                    5. {save['cpu5']}
+                    6. {save['cpu6']}
+                    7. {save['cpu7']}
+                    8. Exit
                     """)
     
 
@@ -200,8 +208,23 @@ def attack():
 
     elif choice == "2":
             atk("cpu2", save)
-
+    
     elif choice == "3":
+            atk("cpu3", save)
+
+    elif choice == "4":
+            atk("cpu4", save)
+
+    elif choice == "5":
+            atk("cpu5", save)
+
+    elif choice == "6":
+            atk("cpu6", save)
+
+    elif choice == "7":
+            atk("cpu7", save)
+
+    elif choice == "8":
         pass
 
     else:
@@ -457,18 +480,66 @@ def ai(action):
 ###############
 
     ai_research_logic('cpu1', action, save, data)
-
-###############
     ai_research_logic('cpu2', action, save, data)
+    ai_research_logic('cpu3', action, save, data)
+    ai_research_logic('cpu4', action, save, data)
+    ai_research_logic('cpu5', action, save, data)
+    ai_research_logic('cpu6', action, save, data)
+    ai_research_logic('cpu7', action, save, data)
 
     ##############################################################
     ##############################################################
 
-    if save['turn'] > 3:
+    if save['turn'] > 6:
         ai_attack_logic('cpu1', 'cpu2', save)
+        ai_attack_logic('cpu1', 'cpu3', save)
+        ai_attack_logic('cpu1', 'cpu4', save)
+        ai_attack_logic('cpu1', 'cpu5', save)
+        ai_attack_logic('cpu1', 'cpu6', save)
+        ai_attack_logic('cpu1', 'cpu7', save)
 
-        #####################
         ai_attack_logic('cpu2', 'cpu1', save)
+        ai_attack_logic('cpu2', 'cpu3', save)
+        ai_attack_logic('cpu2', 'cpu4', save)
+        ai_attack_logic('cpu2', 'cpu5', save)
+        ai_attack_logic('cpu2', 'cpu6', save)
+        ai_attack_logic('cpu2', 'cpu7', save)
+
+        ai_attack_logic('cpu3', 'cpu1', save)
+        ai_attack_logic('cpu3', 'cpu2', save)
+        ai_attack_logic('cpu3', 'cpu4', save)
+        ai_attack_logic('cpu3', 'cpu5', save)
+        ai_attack_logic('cpu3', 'cpu6', save)
+        ai_attack_logic('cpu3', 'cpu7', save)
+
+        ai_attack_logic('cpu4', 'cpu1', save)
+        ai_attack_logic('cpu4', 'cpu2', save)
+        ai_attack_logic('cpu4', 'cpu3', save)
+        ai_attack_logic('cpu4', 'cpu5', save)
+        ai_attack_logic('cpu4', 'cpu6', save)
+        ai_attack_logic('cpu4', 'cpu7', save)
+
+        ai_attack_logic('cpu5', 'cpu1', save)
+        ai_attack_logic('cpu5', 'cpu2', save)
+        ai_attack_logic('cpu5', 'cpu3', save)
+        ai_attack_logic('cpu5', 'cpu4', save)
+        ai_attack_logic('cpu5', 'cpu6', save)
+        ai_attack_logic('cpu5', 'cpu7', save)
+
+        ai_attack_logic('cpu6', 'cpu1', save)
+        ai_attack_logic('cpu6', 'cpu2', save)
+        ai_attack_logic('cpu6', 'cpu3', save)
+        ai_attack_logic('cpu6', 'cpu4', save)
+        ai_attack_logic('cpu6', 'cpu5', save)
+        ai_attack_logic('cpu6', 'cpu7', save)
+
+        ai_attack_logic('cpu7', 'cpu1', save)
+        ai_attack_logic('cpu7', 'cpu2', save)
+        ai_attack_logic('cpu7', 'cpu3', save)
+        ai_attack_logic('cpu7', 'cpu4', save)
+        ai_attack_logic('cpu7', 'cpu5', save)
+        ai_attack_logic('cpu7', 'cpu6', save)
+
 
         ##############################################################
     if save['player_firepower'] < 0:
@@ -495,7 +566,7 @@ def ai(action):
             json.dump(save, f, indent=4)
 
         ##############################################################
-    if save['cpu1_firepower'] < 0 and save['cpu2_firepower'] < 0:
+    if save['cpu1_firepower'] < 0 and save['cpu2_firepower'] < 0 and save['cpu3_firepower'] < 0 and save['cpu4_firepower'] < 0 and save['cpu5_firepower'] < 0 and save['cpu6_firepower'] < 0 and save['cpu7_firepower'] < 0:
         print("Congratulations! You have defeated all countries!")
         print("You are the ultimate conqueror!")
         print("You are the champion of north america!")
