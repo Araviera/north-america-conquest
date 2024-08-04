@@ -117,8 +117,9 @@ def atk(cpu, save):
             save[cpuf] -= attack_power
             with open('save.json', 'w') as f:
                 json.dump(save, f, indent=4)
-            art.rising()
-            art.falling()
+            if save['nuke'] == "True":
+                art.rising()
+                art.falling()
             print("You attacked", save[cpu], "with", attack_power, "firepower!")
 
             if save[cpuf] < 0:
@@ -491,54 +492,10 @@ def ai(action):
     ##############################################################
 
     if save['turn'] > 6:
-        ai_attack_logic('cpu1', 'cpu2', save)
-        ai_attack_logic('cpu1', 'cpu3', save)
-        ai_attack_logic('cpu1', 'cpu4', save)
-        ai_attack_logic('cpu1', 'cpu5', save)
-        ai_attack_logic('cpu1', 'cpu6', save)
-        ai_attack_logic('cpu1', 'cpu7', save)
-
-        ai_attack_logic('cpu2', 'cpu1', save)
-        ai_attack_logic('cpu2', 'cpu3', save)
-        ai_attack_logic('cpu2', 'cpu4', save)
-        ai_attack_logic('cpu2', 'cpu5', save)
-        ai_attack_logic('cpu2', 'cpu6', save)
-        ai_attack_logic('cpu2', 'cpu7', save)
-
-        ai_attack_logic('cpu3', 'cpu1', save)
-        ai_attack_logic('cpu3', 'cpu2', save)
-        ai_attack_logic('cpu3', 'cpu4', save)
-        ai_attack_logic('cpu3', 'cpu5', save)
-        ai_attack_logic('cpu3', 'cpu6', save)
-        ai_attack_logic('cpu3', 'cpu7', save)
-
-        ai_attack_logic('cpu4', 'cpu1', save)
-        ai_attack_logic('cpu4', 'cpu2', save)
-        ai_attack_logic('cpu4', 'cpu3', save)
-        ai_attack_logic('cpu4', 'cpu5', save)
-        ai_attack_logic('cpu4', 'cpu6', save)
-        ai_attack_logic('cpu4', 'cpu7', save)
-
-        ai_attack_logic('cpu5', 'cpu1', save)
-        ai_attack_logic('cpu5', 'cpu2', save)
-        ai_attack_logic('cpu5', 'cpu3', save)
-        ai_attack_logic('cpu5', 'cpu4', save)
-        ai_attack_logic('cpu5', 'cpu6', save)
-        ai_attack_logic('cpu5', 'cpu7', save)
-
-        ai_attack_logic('cpu6', 'cpu1', save)
-        ai_attack_logic('cpu6', 'cpu2', save)
-        ai_attack_logic('cpu6', 'cpu3', save)
-        ai_attack_logic('cpu6', 'cpu4', save)
-        ai_attack_logic('cpu6', 'cpu5', save)
-        ai_attack_logic('cpu6', 'cpu7', save)
-
-        ai_attack_logic('cpu7', 'cpu1', save)
-        ai_attack_logic('cpu7', 'cpu2', save)
-        ai_attack_logic('cpu7', 'cpu3', save)
-        ai_attack_logic('cpu7', 'cpu4', save)
-        ai_attack_logic('cpu7', 'cpu5', save)
-        ai_attack_logic('cpu7', 'cpu6', save)
+        for cpu1 in range(1, 8):
+            for cpu2 in range(1, 8):
+                if cpu1 != cpu2:
+                    ai_attack_logic(f'cpu{cpu1}', f'cpu{cpu2}', save)
 
 
         ##############################################################
@@ -579,64 +536,3 @@ def ai(action):
         clear_console()
         exit()
         
-############# US Anthem ################
-def us_anthem():
-    print("And the rocket's red glare,")
-    time.sleep(1)
-    print("The bombs bursting in air,")
-    time.sleep(1)
-    print("Gave proof through the night")
-    time.sleep(1)
-    print("That our flag was still there;")
-    time.sleep(1)
-    print("O say does that star-spangled banner yet wave")
-    time.sleep(1)
-    print("O'er the land of the free and the home of the brave!")
-    time.sleep(1)
-    print("You have chosen to play as the mighty US!")
-    print("Prepare to dominate north america!")
-    time.sleep(2)
-
-############# Canada Anthem ################
-def can_anthem():
-    print("O Canada!")
-    time.sleep(1)
-    print("From far and wide, O Canada,")
-    time.sleep(1)
-    print("We stand on guard for thee.")
-    time.sleep(1)
-    print("God keep our land glorious and free!")
-    time.sleep(1)
-    print("O Canada, we stand on guard for thee.")
-    time.sleep(1)
-    print("O Canada, we stand on guard for thee.")
-    time.sleep(1)
-
-    print("You have chosen to play as Canada!")
-    print("Prepare for an epic conquest!")
-    print("your objective is clear. take over north america!")
-    time.sleep(2)
-
-############# Mexico Anthem ################
-def mx_anthem():
-    print("¡Guerra, guerra sin tregua al que intente")
-    time.sleep(1)
-    print("de la patria manchar los blasones!")
-    time.sleep(1)
-    print("¡Guerra, guerra! los patrios pendones")
-    time.sleep(1)
-    print("en las olas de sangre empapad.")
-    time.sleep(1)
-    print("¡Guerra, guerra! en el monte, en el valle,")
-    time.sleep(1)
-    print("los cañones horrísonos truenen")
-    time.sleep(1)
-    print("y los ecos sonoros resuenen")
-    time.sleep(1)
-    print("con las voces de ¡Unión! ¡Libertad!")
-    clear_console()
-    print("¡Viva México!")
-    time.sleep(1)
-    print("You have chosen to play as Mexico!")
-    print("Prepare for an epic conquest!")
-    time.sleep(2)

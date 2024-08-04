@@ -236,6 +236,9 @@ def researchmenu():
 #################################################################                           1
         if nuclearmenu == "1":
             research(data, save, 'nuclear_weapons')
+            save['nuke'] = "True"
+            with open('save.json', 'w') as f:
+                json.dump(save, f, indent=4)
 
 
 #################################################################

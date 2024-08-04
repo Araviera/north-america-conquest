@@ -47,30 +47,21 @@ def main():
         
         #save the player's choice into lowercase for convenience
         save['player'] = player.lower()
+
+            
         
 
     ##############################  USA  ##################
         if save['player'] == "usa":
-
-
-#save the player's gold, miners, and firepower into the save file
+            #set the player's gold, miners, and firepower to the default values
             save['player_gold'] = data['usa_gold']
-            with open('save.json', 'w') as f:
-                json.dump(save, f)
-
             save['player_miners'] = data['usa_miners']
-            with open('save.json', 'w') as f:
-                json.dump(save, f)
-            
             save['player_firepower'] = data['usa_firepower']
+            #save the player's gold, miners, and firepower into the save file
             with open('save.json', 'w') as f:
                 json.dump(save, f, indent=4)
-
-
-            #show the national anthem
             pydata.clear_console()
-            save['player_flag'] = flags.usa
-            pydata.us_anthem()
+
 
     ###########################  Canada  ##################
         elif save['player'] == "canada":
@@ -78,22 +69,13 @@ def main():
 
             #save the player's gold, miners, and firepower into the save file
             save['player_gold'] = data['canada_gold']
-            with open('save.json', 'w') as f:
-                json.dump(save, f)
-
             save['player_miners'] = data['canada_miners']
-            with open('save.json', 'w') as f:
-                json.dump(save, f)
-            
             save['player_firepower'] = data['canada_firepower']
             with open('save.json', 'w') as f:
                 json.dump(save, f, indent=4)
 
 
-            #show the national anthem
             pydata.clear_console()
-            save['player_flag'] = flags.canada
-            pydata.can_anthem()
 
 
     ##################  Mexico  ##################
@@ -102,21 +84,12 @@ def main():
 
             #save the player's gold, miners, and firepower into the save file
             save['player_gold'] = data['mexico_gold']
-            with open('save.json', 'w') as f:
-                json.dump(save, f)
-
-            save['player_miners'] = data['mexico_miners']
-            with open('save.json', 'w') as f:
-                json.dump(save, f)
-            
+            save['player_miners'] = data['mexico_miners']            
             save['player_firepower'] = data['mexico_firepower']
             with open('save.json', 'w') as f:
                 json.dump(save, f)
 
-            #show the national anthem
             pydata.clear_console()
-            save['player_flag'] = flags.mexico
-            pydata.mx_anthem()
 
         save['save'] = "true"
         with open('save.json', 'w') as f:
@@ -125,6 +98,9 @@ def main():
         save['turn'] = 1
         with open('save.json', 'w') as f:
             json.dump(save, f, indent=4)
+        save["nuke"] = "False"
+        with open('save.json', 'w') as f:
+            json.dump(save, f)
         pydata.cpu()
 
     
@@ -137,7 +113,6 @@ def main():
               """)
         
         save = load_save()
-        print(save['player_flag'])
         action = input("""what would you like to do?
                        1. buy miners
                        2. research
@@ -180,7 +155,7 @@ def main():
             turn_counter()
             print("turn ended.")
             pydata.ai(action)
-            time.sleep(2)
+            time.sleep(4)
             pydata.clear_console()
 
 ##################  Spy  ##################
@@ -221,7 +196,6 @@ def main():
             print(flags.uwu)
             what = input("what is this character's name? ")
             if what.lower() == "astolfo":
-                save['player_flag'] = flags.uwu
                 save['player_gold'] += 100000000
                 save['player_miners'] += 100
                 save['player_firepower'] += 10000000
