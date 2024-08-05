@@ -35,13 +35,16 @@ def main():
         #player chooses a country to play as
         player = input("""
               Choose a country to play as:
-               USA
-                 Canada
-                     Mexico
                        
+                USA, Canada, Mexico, UK, Russia, China, France, Germany, Spain, Italy
+                Portugal, Greece, Sweden, Norway, Denmark, Finland, Poland, Netherlands
+                Egypt, South Africa, Nigeria, Algeria, Morocco, Ethiopia
+                       
+
+
               """)
         #while loop to make sure the player chooses a valid country
-        while player.lower() not in ["usa", "canada", "mexico"]:
+        while player.lower() not in ["usa", "canada", "mexico", "uk", "russia", "china", "france", "germany", "spain", "italy", "portugal", "greece", "sweden", "norway", "denmark", "finland", "poland", "netherlands", "egypt", "south_africa", "nigeria", "algeria", "morocco", "ethiopia"]:
             pydata.clear_console()
             player = input("Invalid input. Please choose a valid country to play as: ")
         
@@ -90,6 +93,23 @@ def main():
                 json.dump(save, f)
 
             pydata.clear_console()
+    
+    ###########################  Other Countries  ##################
+        else:
+            # Check if the player's choice matches any other country
+            if save['player'] in ["uk", "russia", "china", "france", "germany", "spain", "italy", "portugal", "greece", "sweden", "norway", "denmark", "finland", "poland", "netherlands", "egypt", "south_africa", "nigeria", "algeria", "morocco", "ethiopia"]:
+                # Set the player's gold, miners, and firepower based on the chosen country
+                save['player_gold'] = data[f"{save['player']}_gold"]
+                save['player_miners'] = data[f"{save['player']}_miners"]
+                save['player_firepower'] = data[f"{save['player']}_firepower"]
+                # Save the player's gold, miners, and firepower into the save file
+                with open('save.json', 'w') as f:
+                    json.dump(save, f, indent=4)
+                pydata.clear_console()
+            else:
+                pydata.clear_console()
+                print("Invalid input. Please choose a valid country to play as.")
+                pass
 
         save['save'] = "true"
         with open('save.json', 'w') as f:
@@ -108,20 +128,17 @@ def main():
     while True:
 
         print(f"""
-                                                **North America Conquest**
+                                                **World Conquest**
               Turn: {save['turn']}   Country: {save['player']}   Gold: {save['player_gold']}   Miners: {save['player_miners']}   Firepower: {save['player_firepower']}
               """)
         
         save = load_save()
-        action = input("""what would you like to do?
-                       1. buy miners
-                       2. research
-                       3. attack
-                       4. end turn
-                       5. send a spy
-                       6. exit (progress will be saved)
-                       7. reset the game
-                       """)
+        actions = ["buy miners", "research", "attack", "end turn", "send a spy", "exit (progress will be saved)", "reset the game"]
+
+        for index, item in enumerate(actions, start=1):
+            print(f"{index}. {item}")
+        action = input("what would you like to do? ")
+
         
 #################################  Actions  ################################
 ##################  Miners  ##################
@@ -130,6 +147,7 @@ def main():
             pydata.miners()
             time.sleep(1)
             pydata.clear_console()
+
 
 ##################  Research  ##################
         elif action == "2":
@@ -140,23 +158,31 @@ def main():
 
 ##################  Attack  ##################
         elif action == "3":
-            if save['turn'] < 6:
+            if save['turn'] < 10:
                 pydata.clear_console()
-                print("You must wait until turn 6 to attack.")
+                print("You must wait until turn 10 to attack.")
                 time.sleep(1)
                 pydata.clear_console()
             else:
                 pydata.clear_console()
                 pydata.attack()
                 time.sleep(3)
+                pydata.clear_console()
 
 ##################  End Turn  ##################
         elif action == "4":
-            turn_counter()
-            print("turn ended.")
-            pydata.ai(action)
-            time.sleep(4)
-            pydata.clear_console()
+            if save['turn'] < 10:
+                turn_counter()
+                print("turn ended.")
+                pydata.ai(action)
+                time.sleep(1)
+                pydata.clear_console()
+            else:
+                turn_counter()
+                print("turn ended.")
+                pydata.ai(action)
+                input("Press enter to continue.")
+                pydata.clear_console()
 
 ##################  Spy  ##################
         elif action == "5":
@@ -213,8 +239,6 @@ def main():
                 time.sleep(3)
                 pydata.clear_console()
                 break
-
-
 
 ##################  Invalid Input  ##################
         else:
